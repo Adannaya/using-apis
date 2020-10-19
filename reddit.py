@@ -11,9 +11,10 @@ def jprint(obj):
 
 url = "https://www.reddit.com/r/ShowerThoughts/new/.json"
 parameters = {"limit": 10}
-response = requests.get(url, params=parameters)
+heads = {"User-Agent": "shower_thoughts"}
+response = requests.get(url, params=parameters, headers=heads)
 
-if response.status_code != 200:
+if response.status_code != requests.codes.ok:
     print("Page is currently unavailable, try again later.")
 else:
     #jprint(response.json())
@@ -23,4 +24,3 @@ else:
         post_titles.append(title)
     for i, post in enumerate(post_titles, start=1):
         print(f"{i}: {post}")
-        
